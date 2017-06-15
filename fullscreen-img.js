@@ -3,11 +3,24 @@
 // TODO insert image with reveal transition
 var BGR;
 
-$(document).ready(function() {
-  // Hide all our fullscreen markdown images
-  $("img[alt='']").hide();
-  $('section img[alt="Fullscreen"]').hide();
-});
+// Hide all Fullscreen images to start off with
+if ('undefined' == typeof window.jQuery) { // Newer browsers don't need jQuery since we have querySelectorAll()
+  window.addEventListener('load', function(){
+  var temp = document.querySelectorAll("img[alt='']");
+  temp.forEach(function (i) {});
+  temp = document.querySelectorAll('section img[alt="Fullscreen"]');
+  temp.forEach(function(i) {
+    i.style.display="none";
+  });
+  });
+} else {
+  $(document).ready(function() {
+    // Hide all our fullscreen markdown images
+    $("img[alt='']").hide();
+    $('section img[alt="Fullscreen"]').hide();
+  });
+}
+
 
 function fullscreen(event) {
   var url = event.currentSlide.getAttribute("fullscreen-img");
